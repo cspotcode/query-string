@@ -1,19 +1,11 @@
 'use strict';
-var strictUriEncode = require('strict-uri-encode');
 var $ = require('jquery');
 
-var $map = $.map;
+var $param = $.param;
 var $each = $.each;
 var isArray = $.isArray;
 var trim = $.trim;
 var hop = Object.prototype.hasOwnProperty;
-var keys = function(obj) {
-	var ret = [];
-	$each(obj, function(i, v) {
-		ret.push(v);
-	});
-	return ret;
-};
 
 exports.extract = function (str) {
 	return str.split('?')[1] || '';
@@ -56,24 +48,5 @@ exports.parse = function (str) {
 };
 
 exports.stringify = function (obj) {
-	// $map removes null and undefined and flattens arrays
-	return obj ? $map(keys(obj).sort(), function (key) {
-		var val = obj[key];
-
-		if (val === undefined) {
-			return null;
-		}
-
-		if (val === null) {
-			return key === '' ? null : key;
-		}
-
-		if (isArray(val)) {
-			return $map(val.slice().sort(), function (val2) {
-				return strictUriEncode(key) + '=' + strictUriEncode(val2);
-			});
-		}
-
-		return strictUriEncode(key) + '=' + strictUriEncode(val);
-	}).join('&') : '';
+	return $param(obj, true);
 };
