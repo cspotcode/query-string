@@ -2,6 +2,7 @@
 var strictUriEncode = require('strict-uri-encode');
 var $ = require('jquery');
 
+var $each = $.each;
 var trim = $.trim;
 
 exports.extract = function (str) {
@@ -19,7 +20,8 @@ exports.parse = function (str) {
 		return {};
 	}
 
-	return str.split('&').reduce(function (ret, param) {
+	var ret = {};
+	$each(str.split('&'), function (i, param) {
 		var parts = param.replace(/\+/g, ' ').split('=');
 		// Firefox (pre 40) decodes `%3D` to `=`
 		// https://github.com/sindresorhus/query-string/pull/37
@@ -39,9 +41,8 @@ exports.parse = function (str) {
 		} else {
 			ret[key] = [ret[key], val];
 		}
-
-		return ret;
-	}, {});
+	});
+	return ret;
 };
 
 exports.stringify = function (obj) {
