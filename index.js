@@ -3,6 +3,7 @@ var strictUriEncode = require('strict-uri-encode');
 var $ = require('jquery');
 
 var $each = $.each;
+var isArray = $.isArray;
 var trim = $.trim;
 
 exports.extract = function (str) {
@@ -36,7 +37,7 @@ exports.parse = function (str) {
 
 		if (!ret.hasOwnProperty(key)) {
 			ret[key] = val;
-		} else if (Array.isArray(ret[key])) {
+		} else if (isArray(ret[key])) {
 			ret[key].push(val);
 		} else {
 			ret[key] = [ret[key], val];
@@ -57,7 +58,7 @@ exports.stringify = function (obj) {
 			return key;
 		}
 
-		if (Array.isArray(val)) {
+		if (isArray(val)) {
 			return val.slice().sort().map(function (val2) {
 				return strictUriEncode(key) + '=' + strictUriEncode(val2);
 			}).join('&');
