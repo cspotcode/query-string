@@ -1,5 +1,8 @@
 'use strict';
 var strictUriEncode = require('strict-uri-encode');
+var $ = require('jquery');
+
+var trim = $.trim;
 
 exports.extract = function (str) {
 	return str.split('?')[1] || '';
@@ -10,7 +13,7 @@ exports.parse = function (str) {
 		return {};
 	}
 
-	str = str.trim().replace(/^(\?|#|&)/, '');
+	str = trim(str).replace(/^(\?|#|&)/, '');
 
 	if (!str) {
 		return {};
