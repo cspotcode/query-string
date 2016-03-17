@@ -6,6 +6,13 @@ var $each = $.each;
 var isArray = $.isArray;
 var trim = $.trim;
 var hop = Object.prototype.hasOwnProperty;
+var keys = function(obj) {
+	var ret = [];
+	$each(obj, function(i, v) {
+		ret.push(v);
+	});
+	return ret;
+};
 
 exports.extract = function (str) {
 	return str.split('?')[1] || '';
@@ -48,7 +55,7 @@ exports.parse = function (str) {
 };
 
 exports.stringify = function (obj) {
-	return obj ? Object.keys(obj).sort().map(function (key) {
+	return obj ? keys(obj).sort().map(function (key) {
 		var val = obj[key];
 
 		if (val === undefined) {
