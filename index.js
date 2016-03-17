@@ -5,6 +5,7 @@ var $ = require('jquery');
 var $each = $.each;
 var isArray = $.isArray;
 var trim = $.trim;
+var hop = Object.prototype.hasOwnProperty;
 
 exports.extract = function (str) {
 	return str.split('?')[1] || '';
@@ -35,7 +36,7 @@ exports.parse = function (str) {
 		// http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
 		val = val === undefined ? null : decodeURIComponent(val);
 
-		if (!ret.hasOwnProperty(key)) {
+		if (!hop.call(ret, key)) {
 			ret[key] = val;
 		} else if (isArray(ret[key])) {
 			ret[key].push(val);
