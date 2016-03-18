@@ -3,11 +3,11 @@
   "version": "3.0.1",
   "description": "Parse and stringify URL query strings",
   "license": "MIT",
-  "repository": "sindresorhus/query-string",
+  "repository": "cspotcode/query-string",
   "author": {
-    "name": "Sindre Sorhus",
-    "email": "sindresorhus@gmail.com",
-    "url": "sindresorhus.com"
+    "name": "Andrew Bradley",
+    "email": "cspotcode@gmail.com",
+    "url": "cspotcode.com"
   },
   "engines": {
     "node": ">=0.10.0"
