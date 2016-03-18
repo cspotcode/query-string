@@ -49,3 +49,10 @@ test('query strings params including embedded `=`', t => {
 test('query strings params including raw `=`', t => {
 	t.same(fn.parse('?param=http://someurl?id=2837'), {param: 'http://someurl?id=2837'});
 });
+
+test('query strings param is hasOwnProperty or __proto__', t => {
+	var result = {__proto__: null};
+	result.__proto__ = [null, null];
+	result.hasOwnProperty = null;
+	t.same(fn.parse('?hasOwnProperty&__proto__&__proto__'), result);
+});

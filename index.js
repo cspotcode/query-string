@@ -1,5 +1,9 @@
 'use strict';
 var $ = require('jquery');
+// When running tests in node, create a fake `window` for jQuery
+if (!$.fn) {
+	$ = $(require('domino').createWindow());
+}
 
 var $param = $.param;
 var $each = $.each;
