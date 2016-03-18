@@ -1,12 +1,17 @@
-# query-string [![Build Status](https://travis-ci.org/sindresorhus/query-string.svg?branch=master)](https://travis-ci.org/sindresorhus/query-string)
+# query-string [![Build Status](https://travis-ci.org/cspotcode/query-string.svg?branch=master)](https://travis-ci.org/cspotcode/query-string)
 
 > Parse and stringify URL [query strings](http://en.wikipedia.org/wiki/Query_string)
 
+This is a fork of the original ([sindresorhus/query-string](https://github.com/sindresorhus/query-string)) that's
+compatible with IE8.  Also, it uses a few jQuery methods in place of an ES5 polyfill, so you'll need jQuery. `stringify`
+defers to `jQuery.param` so the behavior is slightly different.
+
+---
 
 ## Install
 
 ```
-$ npm install --save query-string
+$ npm install --save cspotcode/query-string
 ```
 
 
@@ -73,4 +78,4 @@ queryString.stringify({
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](http://sindresorhus.com) and [Andrew Bradley](http://www.cspotcode.com)
