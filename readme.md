@@ -11,7 +11,7 @@ defers to `jQuery.param` so the behavior is slightly different.
 ## Install
 
 ```
-$ npm install --save cspotcode/query-string
+$ npm install --save @cspotcode/query-string
 ```
 
 
