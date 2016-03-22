@@ -51,8 +51,13 @@ test('query strings params including raw `=`', t => {
 });
 
 test('query strings param is hasOwnProperty or __proto__', t => {
-	var result = {__proto__: null};
-	result.__proto__ = [null, null];
+	var result = {};
 	result.hasOwnProperty = null;
+	Object.defineProperty(result, '__proto__', {
+		value: [null, null],
+		writable: true,
+		enumerable: true,
+		configurable: true
+	});
 	t.same(fn.parse('?hasOwnProperty&__proto__&__proto__'), result);
 });

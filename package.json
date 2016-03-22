@@ -38,6 +38,13 @@
   },
   "devDependencies": {
     "ava": "*",
+    "domino": "^1.0.23",
+    "jquery": "^2.2.2",
     "xo": "*"
+  },
+  "xo": {
+    "rules": {
+      "no-proto": "off"
+    }
   }
 }

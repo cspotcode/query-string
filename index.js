@@ -10,6 +10,36 @@ var $each = $.each;
 var isArray = $.isArray;
 var trim = $.trim;
 var hop = Object.prototype.hasOwnProperty;
+// IE 8 can't defineProperty on plain objects.
+// However, IE 8 also doesn't seem to give any special meaning to the __proto__ property so we should
+// (famous last words) be ok.
+var supportsDefineProperty = false;
+try {
+	Object.defineProperty({}, 'x', {});
+	supportsDefineProperty = true;
+} catch (e) {}
+/**
+ * Safely set a property on a dictionary object.
+ */
+var setProp =
+	supportsDefineProperty ?
+	function (obj, key, value) {
+		if (key in obj) {
+			Object.defineProperty(obj, key, {
+				value: value,
+				writable: true,
+				configurable: true,
+				enumerable: true
+			});
+		} else {
+			obj[key] = value;
+		}
+		return value;
+	} :
+	function (obj, key, value) {
+		obj[key] = value;
+		return value;
+	};
 
 exports.extract = function (str) {
 	return str.split('?')[1] || '';
@@ -41,16 +71,16 @@ exports.parse = function (str) {
 		val = val === undefined ? null : decodeURIComponent(val);
 
 		if (!hop.call(ret, key)) {
-			ret[key] = val;
+			setProp(ret, key, val);
 		} else if (isArray(ret[key])) {
 			ret[key].push(val);
 		} else {
-			ret[key] = [ret[key], val];
+			setProp(ret, key, [ret[key], val]);
 		}
 	});
 	return ret;
 };
 
 exports.stringify = function (obj) {
-	return $param(obj, true);
+	return $param(obj || {}, true);
 };
