@@ -1,6 +1,6 @@
 {
   "name": "@cspotcode/query-string",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Parse and stringify URL query strings in IE8",
   "license": "MIT",
   "repository": "cspotcode/query-string",
