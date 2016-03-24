@@ -1,8 +1,8 @@
 'use strict';
 var $ = require('jquery');
-// When running tests in node, create a fake `window` for jQuery
+// When running tests in node, jQuery must be explicitly instantiated by passing it a `window`.
 if (!$.fn) {
-	$ = $(require('domino').createWindow());
+	$ = $(global.window);
 }
 
 var $param = $.param;
